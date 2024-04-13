@@ -1,0 +1,118 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+.whole-container{
+  overflow: hidden;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+.logo-div{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-top: 20px;
+  gap: 10px;
+}
+img{
+  height: 30px;
+  width: 30px;
+}
+.app-head{
+  text-align: center;
+  text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+}
+#first{
+  color: green;
+}
+#second{
+  color: rgb(245, 237, 237);
+}
+#third{
+  color: #003C43;
+}
+.top-div{
+  padding: 0 20px;
+  background-color: white;
+  width: 100%;
+  height: 15vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.add-ip{
+  width: 25%;
+  height: 35px;
+  border: 0;
+  background-color: white;
+  border-radius: 10px;
+  padding-left: 10px;
+  outline:0;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.add-bt{
+  width: 10%;
+  height: 35px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  background-color: #77B0AA;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  cursor: pointer;
+}
+.add-bt:hover{
+  border-radius: 7px;
+  background-color: #003C43;
+  color: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+}
+.body-div{
+  background-color: #003C43;
+  height: 91vh;
+  width: 100%;
+  border-radius: 15px 15px 0 0;
+  overflow-y: scroll;
+}
+.body-div::-webkit-scrollbar{
+  display: none;
+}
+
+table{
+  width: 100%;
+  border-collapse: collapse;
+  color: #cef5eb;
+}
+thead{
+  font-size: 17px;
+  background-color: #135D66;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+}
+tr,th,td{
+  padding: 20px;
+  text-align: center;
+}
+td{
+  border: 1px solid #cef5eb;
+}
+.edit-bt,.del-bt{
+  border: 0;
+  margin: 0;
+  outline: 0;
+  cursor: pointer;
+  background-color: inherit;
+}
+.no-emp{
+  margin-top: 20px;
+  text-align: center;
+  color: #cef5eb;
+}
