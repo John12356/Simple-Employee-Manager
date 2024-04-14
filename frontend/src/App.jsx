@@ -5,7 +5,8 @@ import { MdDelete } from "react-icons/md";
 import axios from "axios";
 import Dialog from "./components/Dialog/Dialog";
 import EditBox from "./components/EditBox/EditBox";
-
+import Aos from "aos";
+import "aos/dist/aos.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import logo from "./assets/logo.jpg";
@@ -13,6 +14,9 @@ import logo from "./assets/logo.jpg";
 const App = () => {
   axios.defaults.xsrfCookieName = "csrftoken";
   axios.defaults.xsrfHeaderName = "X-CSRFToken";
+  useEffect(() => {
+    Aos.init({ duration: 400 });
+  }, []);
   const [dialog, setDialog] = useState({
     isLoading: false,
   });
@@ -69,6 +73,11 @@ const App = () => {
       ipValue.emp_name === ""
     ) {
       toast.error("Enter all the details!!..");
+      return;
+    }
+    let found = emp.find((each) => each.emp_id.toString() === ipValue.emp_id);
+    if (found) {
+      toast.error("Employee ID already exist:(");
       return;
     }
     if (ipValue.emp_name.length < 5 || ipValue.emp_name.length > 20) {
@@ -143,7 +152,7 @@ const App = () => {
     <div className="whole-container">
       <ToastContainer
         position="top-center"
-        autoClose={1500}
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -212,7 +221,7 @@ const App = () => {
 
             <tbody>
               {emp.map((each, id) => (
-                <tr key={id}>
+                <tr data-aos="fade-down" key={id}>
                   <td>{each.emp_id}</td>
                   <td>{each.emp_name}</td>
                   <td>{each.emp_age}</td>
