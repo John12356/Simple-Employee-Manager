@@ -34,7 +34,6 @@ const App = () => {
     emp_age: "",
   });
   const [ipValue, setIpValue] = useState({
-    emp_id: "",
     emp_name: "",
     emp_age: "",
   });
@@ -43,7 +42,6 @@ const App = () => {
     axios
       .get("http://127.0.0.1:8000/employee/get")
       .then((res) => {
-        console.log(res.data);
         setEmp(res.data);
       })
       .catch((err) => {
@@ -71,9 +69,9 @@ const App = () => {
 
   const addEmployee = () => {
     if (
-      ipValue.emp_id === "" ||
-      ipValue.emp_age === "" ||
-      ipValue.emp_name === ""
+      ipValue.emp_id.trim() === "" ||
+      ipValue.emp_age.trim() === "" ||
+      ipValue.emp_name.trim() === ""
     ) {
       toast.error("Enter all the details!!..");
       return;
@@ -108,12 +106,11 @@ const App = () => {
   const deleteEmployee = (id) => {
     setDialog({ isLoading: true });
     delIdRef.current = id;
-
   };
 
   const editEmployee = (each) => {
     setEdit({ isLoading: true });
-    setEdited(each)
+    setEdited(each);
     editIdRef.current = each.emp_id;
   };
 
@@ -136,6 +133,18 @@ const App = () => {
   };
 
   const confirmEdit = (yes) => {
+    if (edited.emp_age === "" || edited.emp_name === "") {
+      toast.error("Enter all the details!!..");
+      return;
+    }
+    if (edited.emp_name.length < 5 || edited.emp_name.length > 20) {
+      toast.error("Name should contains 5 to 20 letters");
+      return;
+    }
+    if (edited.emp_age < 18 || edited.emp_age > 60) {
+      toast.error("Age should be 18 to 60");
+      return;
+    }
     if (yes) {
       axios
         .post(
