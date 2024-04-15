@@ -10,4 +10,4 @@ def delete_emp(emp_id):
     EMPLOYEE_DETAILS.objects.get(pk=emp_id).delete()
     
 def get_emp():
-    return EMPLOYEE_DETAILS.objects.values()
+    return EMPLOYEE_DETAILS.objects.order_by('emp_id').values()

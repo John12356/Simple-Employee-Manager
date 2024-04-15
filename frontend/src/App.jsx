@@ -26,6 +26,7 @@ const App = () => {
   const delIdRef = useRef();
   const editIdRef = useRef();
   const [edited, setEdited] = useState({
+    emp_id: "",
     emp_name: "",
     emp_age: "",
   });
@@ -41,6 +42,7 @@ const App = () => {
     axios
       .get("http://127.0.0.1:8000/employee/get")
       .then((res) => {
+        console.log(res.data);
         setEmp(res.data);
       })
       .catch((err) => {
@@ -94,6 +96,7 @@ const App = () => {
       .then((res) => {
         if (res.status === 200) {
           setEmp([...emp, ipValue]);
+          // getEmployee()
           toast.success("Employee added successfully");
           setIpValue({ emp_id: "", emp_name: "", emp_age: "" });
         }
@@ -104,11 +107,13 @@ const App = () => {
   const deleteEmployee = (id) => {
     setDialog({ isLoading: true });
     delIdRef.current = id;
+
   };
 
-  const editEmployee = (id) => {
+  const editEmployee = (each) => {
     setEdit({ isLoading: true });
-    editIdRef.current = id;
+    setEdited(each)
+    editIdRef.current = each.emp_id;
   };
 
   const areYouSure = (yes) => {
@@ -118,8 +123,8 @@ const App = () => {
         .then((res) => {
           if (res.status === 200) {
             toast.success("Deleted successfully :(");
-            getEmployee();
-            // setEmp(emp.filter((emp) => delIdRef.current !== emp.emp_id));
+            // getEmployee();
+            setEmp(emp.filter((emp) => delIdRef.current !== emp.emp_id));
           }
         })
         .catch((err) => console.log(err));
@@ -204,6 +209,8 @@ const App = () => {
             confirmEdit={confirmEdit}
             setEdited={setEdited}
             edited={edited}
+            emp={emp}
+            editIdRef={editIdRef}
           />
         )}
         {dialog.isLoading && <Dialog areYouSure={areYouSure} />}
@@ -221,13 +228,13 @@ const App = () => {
 
             <tbody>
               {emp.map((each, id) => (
-                <tr data-aos="fade-down" key={id}>
+                <tr key={id}>
                   <td>{each.emp_id}</td>
                   <td>{each.emp_name}</td>
                   <td>{each.emp_age}</td>
                   <td>
                     <button
-                      onClick={() => editEmployee(each.emp_id)}
+                      onClick={() => editEmployee(each)}
                       className="edit-bt"
                     >
                       <FaRegEdit size={22} color="green" />
