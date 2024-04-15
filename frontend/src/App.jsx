@@ -14,9 +14,11 @@ import logo from "./assets/logo.jpg";
 const App = () => {
   axios.defaults.xsrfCookieName = "csrftoken";
   axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
   useEffect(() => {
     Aos.init({ duration: 400 });
   }, []);
+
   const [dialog, setDialog] = useState({
     isLoading: false,
   });
@@ -25,6 +27,7 @@ const App = () => {
   });
   const delIdRef = useRef();
   const editIdRef = useRef();
+  const [emp, setEmp] = useState([{}]);
   const [edited, setEdited] = useState({
     emp_id: "",
     emp_name: "",
@@ -35,8 +38,6 @@ const App = () => {
     emp_name: "",
     emp_age: "",
   });
-
-  const [emp, setEmp] = useState([{}]);
 
   useEffect(() => {
     axios
